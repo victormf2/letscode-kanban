@@ -41,7 +41,6 @@ namespace LetsCode.Kanban.UnitTests.Application.UserActions.UpdateCard
             result.ShouldHaveValidationErrorFor(p => p.Id);
         }
 
-
         [Theory]
         [InlineData("t")]
         [InlineData("tttttttttttttttttttttttttttttttttttttttttttttttttt")]
