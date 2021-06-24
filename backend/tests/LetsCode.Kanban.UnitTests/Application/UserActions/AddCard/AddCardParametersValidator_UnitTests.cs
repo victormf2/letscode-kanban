@@ -5,11 +5,11 @@ using Xunit;
 
 namespace LetsCode.Kanban.UnitTests.Application.UserActions.AddCard
 {
-    public class AddCardParametersValidatorTests
+    public class AddCardParametersValidator_UnitTests
     {
         private readonly AddCardParametersValidator _validator;
 
-        public AddCardParametersValidatorTests()
+        public AddCardParametersValidator_UnitTests()
         {
             _validator = new AddCardParametersValidator();
         }
