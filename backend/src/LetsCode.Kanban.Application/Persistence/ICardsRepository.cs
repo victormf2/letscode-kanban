@@ -7,5 +7,7 @@ namespace LetsCode.Kanban.Application.Persistence
     public interface ICardsRepository
     {
          Task<Guid> Add(Card card);
+         Task<Card> Find(Guid id);
+         Task Update(Card card);
     }
 }

@@ -1,10 +1,13 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace FluentValidation
 {
     public static class FluentValidationExtensions
     {
+        public static IRuleBuilderOptions<T, TProperty> In<T, TProperty>(this IRuleBuilder<T, TProperty> ruleBuilder, IEnumerable<TProperty> validOptions)
+            => In(ruleBuilder, validOptions.ToArray());
         public static IRuleBuilderOptions<T, TProperty> In<T, TProperty>(this IRuleBuilder<T, TProperty> ruleBuilder, params TProperty[] validOptions)
         {
             // code copied from https://stackoverflow.com/a/43358444/1665734

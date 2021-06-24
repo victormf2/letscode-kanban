@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LetsCode.Kanban.Persistence.InMemory
 {
-    public class ApplicationDbContext : DbContext
+    public class InMemoryDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext>  options) : base(options)
+        public InMemoryDbContext(DbContextOptions<InMemoryDbContext>  options) : base(options)
         {
         }
 

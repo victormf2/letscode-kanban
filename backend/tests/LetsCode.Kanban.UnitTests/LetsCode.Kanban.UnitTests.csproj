@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoBogus" Version="2.13.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
     <PackageReference Include="Moq" Version="4.16.1" />
     <PackageReference Include="xunit" Version="2.4.1" />
@@ -22,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\LetsCode.Kanban.Application\LetsCode.Kanban.Application.csproj" />
+    <ProjectReference Include="..\LetsCode.Kanban.TestHelpers\LetsCode.Kanban.TestHelpers.csproj" />
   </ItemGroup>
 
 </Project>

@@ -5,12 +5,12 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace LetsCode.Kanban.IntegrationTests.Common
 {
-    public class WebApiServices
+    public class IntegrationTestsFixture
     {
         private readonly Lazy<IServiceProvider> _rootServiceProvider;
         private readonly IServiceCollection _services;
         
-        public WebApiServices()
+        public IntegrationTestsFixture()
         {
             _services = new ServiceCollection();
             var startup = new Startup();

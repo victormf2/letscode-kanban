@@ -9,7 +9,7 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static void AddInMemoryPersistence(this IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<InMemoryDbContext>(options =>
             {
                 options.UseInMemoryDatabase("letscode_kanban");
             });

@@ -1,4 +1,5 @@
 using FluentValidation;
+using LetsCode.Kanban.Application.Models;
 
 namespace LetsCode.Kanban.Application.UserActions.AddCard
 {
@@ -15,7 +16,7 @@ namespace LetsCode.Kanban.Application.UserActions.AddCard
 
             RuleFor(p => p.ListId)
                 .NotEmpty()
-                .In("ToDo", "Doing", "Done");
+                .In(BoardList.Ids);
         }
     }
 }

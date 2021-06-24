@@ -2,7 +2,10 @@ using System;
 using System.Threading.Tasks;
 using AutoBogus;
 using FluentValidation;
+using LetsCode.Kanban.Application.Core;
+using LetsCode.Kanban.Application.Persistence;
 using LetsCode.Kanban.Application.UserActions.UpdateCard;
+using Moq;
 using Xunit;
 
 namespace LetsCode.Kanban.UnitTests.Application.UserActions.UpdateCard
@@ -13,7 +16,9 @@ namespace LetsCode.Kanban.UnitTests.Application.UserActions.UpdateCard
         public UpdateCardAction_UnitTests()
         {
             _updateCardAction = new UpdateCardAction(
-                parametersValidator: new UpdateCardParametersValidator()
+                parametersValidator: new UpdateCardParametersValidator(),
+                ctx: new Mock<IActionContext>().Object,
+                cards: new Mock<ICardsRepository>().Object
             );
         }
 
