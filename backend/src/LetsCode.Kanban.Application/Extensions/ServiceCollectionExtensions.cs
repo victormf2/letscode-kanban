@@ -1,6 +1,7 @@
 using LetsCode.Kanban.Application.UserActions.AddCard;
 using FluentValidation;
 using LetsCode.Kanban.Application.UserActions.UpdateCard;
+using LetsCode.Kanban.Application.UserActions.RemoveCard;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -12,6 +13,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.AddScoped<AddCardAction>();
             services.AddScoped<UpdateCardAction>();
+            services.AddScoped<RemoveCardAction>();
         }
     }
 }

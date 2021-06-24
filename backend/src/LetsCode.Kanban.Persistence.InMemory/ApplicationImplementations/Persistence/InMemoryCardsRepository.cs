@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using LetsCode.Kanban.Application.Core;
 using LetsCode.Kanban.Application.Models;
@@ -28,16 +29,36 @@ namespace LetsCode.Kanban.Persistence.InMemory.ApplicationImplementations.Persis
             return card.Id;
         }
 
-        public Task<Card> Find(Guid id)
+        public async Task<Card> Find(Guid id)
         {
-            return _dbContext.Set<Card>()
+            var card = await _dbContext.Set<Card>()
+                .FindAsync(new object[] { id }, _ctx.Cancel);
+            return card;
+        }
+
+        public async Task<IReadOnlyList<Card>> ListAll()
+        {
+            var cards = await _dbContext.Set<Card>()
                 .AsNoTracking()
-                .FirstOrDefaultAsync(c => c.Id == id, _ctx.Cancel);
+                .ToListAsync();
+
+            return cards;
+        }
+
+        public Task Remove(Card card)
+        {
+            _dbContext.Remove(card);
+
+            return _dbContext.SaveChangesAsync(_ctx.Cancel);
         }
 
         public Task Update(Card card)
         {
-            _dbContext.Update(card);
+            var entry = _dbContext.Entry(card);
+            if (entry.State == EntityState.Detached)
+            {
+                _dbContext.Update(card);
+            }
 
             return _dbContext.SaveChangesAsync(_ctx.Cancel);
         }
