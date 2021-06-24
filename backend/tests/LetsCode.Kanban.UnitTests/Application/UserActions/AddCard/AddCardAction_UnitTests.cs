@@ -23,7 +23,7 @@ namespace LetsCode.Kanban.UnitTests.Application.UserActions.AddCard
         }
 
         [Fact]
-        public async Task Must_throw_ValidationException_for_invalid_parameters()
+        public async Task Must_throw_ValidationException_for_invalid_AddCardParameters()
         {
             var invalidParameters = new AutoFaker<AddCardParameters>().Generate();
 
