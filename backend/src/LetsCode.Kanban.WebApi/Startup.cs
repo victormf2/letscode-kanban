@@ -1,14 +1,14 @@
-using System.Threading.Tasks;
+using LetsCode.Kanban.Application.Authentication;
 using LetsCode.Kanban.Application.Core;
 using LetsCode.Kanban.WebApi.ApplicationImplementations.Authentication;
 using LetsCode.Kanban.WebApi.ApplicationImplementations.Core;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Threading.Tasks;
 
 namespace LetsCode.Kanban.WebApi
 {
@@ -28,13 +28,24 @@ namespace LetsCode.Kanban.WebApi
             services.AddApplication();
             services.AddInMemoryPersistence();
 
+            var authenticationConfigurationSection = Configuration.GetSection("Authentication");
+            services.Configure<LocalEnvironmentAuthenticatorOptions>(authenticationConfigurationSection);
+            services.AddSingleton<IAuthenticator, LocalEnvironmentAuthenticator>();
+
             var jwtConfigurationSection = Configuration.GetSection("Jwt");
-            services.Configure<JwtGeneratorOptions>(jwtConfigurationSection);
+            services.Configure<JwtGeneratorOptions>(jwtConfigurationSection, options =>
+            {
+                options.BindNonPublicProperties = true;
+            });
+            services.AddSingleton<IJwtGenerator, JwtGenerator>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
-                    var jwtGeneratorOptions = jwtConfigurationSection.Get<JwtGeneratorOptions>();
+                    var jwtGeneratorOptions = jwtConfigurationSection.Get<JwtGeneratorOptions>(options =>
+                    {
+                        options.BindNonPublicProperties = true;
+                    });
 
                     var tokenValidationParameters = options.TokenValidationParameters;
 
@@ -46,17 +57,28 @@ namespace LetsCode.Kanban.WebApi
 
                     tokenValidationParameters.RequireExpirationTime = jwtGeneratorOptions.ExpiresAfter != null;
 
-                    options.Events.OnMessageReceived = ctx =>
+                    tokenValidationParameters.IssuerSigningKey = jwtGeneratorOptions.GetSigningKey();
+
+                    options.Events = new JwtBearerEvents()
                     {
-                        if (ctx.Request.Cookies.TryGetValue("AuthJwt", out string jwt))
+                        OnMessageReceived = ctx =>
                         {
-                            ctx.Token = jwt;
+                            if (ctx.Request.Cookies.TryGetValue("AuthJwt", out string jwt))
+                            {
+                                ctx.Token = jwt;
+                            }
+                            return Task.CompletedTask;
                         }
-                        return Task.CompletedTask;
                     };
                 });
 
+            services.AddAuthorization();
+
+            services.AddHttpContextAccessor();
+            services.AddControllers();
+
             services.AddScoped<IActionContext, WebActionContext>();
+            services.AddSingleton<IDateTime, UtcDateTime>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,12 +91,12 @@ namespace LetsCode.Kanban.WebApi
 
             app.UseRouting();
 
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllers();
             });
         }
     }

@@ -14,8 +14,12 @@ namespace LetsCode.Kanban.WebApi.ApplicationImplementations.Authentication
     {
         public string Issuer { get; set; }
         public string Audience { get; set; }
-        public string Secret { get; set; }
+        public string Secret { private get; set; }
         public TimeSpan? ExpiresAfter { get; set; }
+
+        public SecurityKey GetSigningKey() =>
+            new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Secret));
+        
     }
 
     public class JwtGenerator : IJwtGenerator
@@ -44,7 +48,7 @@ namespace LetsCode.Kanban.WebApi.ApplicationImplementations.Authentication
                 Audience = _options.Audience,
                 IssuedAt = _dateTime.Now,
                 SigningCredentials = new SigningCredentials(
-                    key: new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_options.Secret)), 
+                    key: _options.GetSigningKey(), 
                     algorithm: SecurityAlgorithms.HmacSha256Signature)
             };
 
