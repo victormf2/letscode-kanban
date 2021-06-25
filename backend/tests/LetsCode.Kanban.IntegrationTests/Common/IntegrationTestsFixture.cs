@@ -1,10 +1,8 @@
-using System.Threading;
 using System;
 using LetsCode.Kanban.Application.Core;
 using LetsCode.Kanban.WebApi;
 using Microsoft.Extensions.DependencyInjection;
-using Xunit.Abstractions;
-using LetsCode.Kanban.Persistence.EntityFrameworkCore.InMemory;
+using Microsoft.Extensions.Configuration;
 
 namespace LetsCode.Kanban.IntegrationTests.Common
 {
@@ -16,7 +14,8 @@ namespace LetsCode.Kanban.IntegrationTests.Common
         public IntegrationTestsFixture()
         {
             _services = new ServiceCollection();
-            var startup = new Startup();
+            var configuration = new ConfigurationBuilder().Build();
+            var startup = new Startup(configuration);
             startup.ConfigureServices(_services);
 
             _services.AddScoped<TestActionContext>();
