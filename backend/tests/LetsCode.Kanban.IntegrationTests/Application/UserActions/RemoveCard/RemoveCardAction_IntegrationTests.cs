@@ -12,11 +12,10 @@ using System;
 using System.Threading.Tasks;
 using Xunit;
 using System.Collections.Generic;
-using Xunit.Abstractions;
 
 namespace LetsCode.Kanban.IntegrationTests.Application.UserActions.RemoveCard
 {
-    public class RemoveCardAction_IntegrationTests : IntegrationTestsBase, IClassFixture<IntegrationTestsFixture>
+    public class RemoveCardAction_IntegrationTests : IntegrationTestsBase
     {
         private readonly RemoveCardAction _removeCardAction;
         private readonly ApplicationDbContext _dbContext;

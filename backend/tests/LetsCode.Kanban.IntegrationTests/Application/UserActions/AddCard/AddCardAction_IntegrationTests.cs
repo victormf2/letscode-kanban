@@ -7,11 +7,10 @@ using LetsCode.Kanban.TestHelpers.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace LetsCode.Kanban.IntegrationTests.Application.UserActions.AddCard
 {
-    public class AddCardAction_IntegrationTests : IntegrationTestsBase, IClassFixture<IntegrationTestsFixture>
+    public class AddCardAction_IntegrationTests : IntegrationTestsBase
     {
         private readonly AddCardAction _addCardAction;
         private readonly ApplicationDbContext _dbContext;

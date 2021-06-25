@@ -1,10 +1,11 @@
 using System;
 using LetsCode.Kanban.Persistence.EntityFrameworkCore.InMemory;
 using Microsoft.Extensions.DependencyInjection;
+using Xunit;
 
 namespace LetsCode.Kanban.IntegrationTests.Common
 {
-    public abstract class IntegrationTestsBase : IDisposable
+    public abstract class IntegrationTestsBase : IClassFixture<IntegrationTestsFixture>, IDisposable
     {
         protected IntegrationTestsFixture _integrationTestsFixture;
         private readonly Lazy<IServiceScope> _serviceScope;

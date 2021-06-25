@@ -9,11 +9,10 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace LetsCode.Kanban.IntegrationTests.Application.UserActions.UpdateCard
 {
-    public class UpdateCardAction_IntegrationTests : IntegrationTestsBase, IClassFixture<IntegrationTestsFixture>
+    public class UpdateCardAction_IntegrationTests : IntegrationTestsBase
     {
 
         private readonly UpdateCardAction _updateCardAction;
