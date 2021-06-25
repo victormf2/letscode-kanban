@@ -2,22 +2,23 @@ using AutoBogus;
 using LetsCode.Kanban.Application.Models;
 using LetsCode.Kanban.Application.UserActions.AddCard;
 using LetsCode.Kanban.IntegrationTests.Common;
-using LetsCode.Kanban.Persistence.InMemory;
+using LetsCode.Kanban.Persistence.EntityFrameworkCore;
 using LetsCode.Kanban.TestHelpers.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace LetsCode.Kanban.IntegrationTests.Application.UserActions.AddCard
 {
-    public class AddCardAction_IntegrationTests : IntegrationTestsBase
+    public class AddCardAction_IntegrationTests : IntegrationTestsBase, IClassFixture<IntegrationTestsFixture>
     {
         private readonly AddCardAction _addCardAction;
-        private readonly InMemoryDbContext _dbContext;
-        public AddCardAction_IntegrationTests(IntegrationTestsFixture webApiServices) : base(webApiServices)
+        private readonly ApplicationDbContext _dbContext;
+        public AddCardAction_IntegrationTests(IntegrationTestsFixture integrationTestsFixture) : base(integrationTestsFixture)
         {
             _addCardAction = ServiceProvider.GetService<AddCardAction>();
-            _dbContext = ServiceProvider.GetService<InMemoryDbContext>();
+            _dbContext = ServiceProvider.GetService<ApplicationDbContext>();
         }
 
         [Fact]

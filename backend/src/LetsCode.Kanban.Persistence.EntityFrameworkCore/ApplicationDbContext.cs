@@ -1,11 +1,11 @@
 using LetsCode.Kanban.Application.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace LetsCode.Kanban.Persistence.InMemory
+namespace LetsCode.Kanban.Persistence.EntityFrameworkCore
 {
-    public class InMemoryDbContext : DbContext
+    public abstract class ApplicationDbContext : DbContext
     {
-        public InMemoryDbContext(DbContextOptions<InMemoryDbContext>  options) : base(options)
+        public ApplicationDbContext(DbContextOptions options) : base(options)
         {
         }
 

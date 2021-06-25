@@ -1,7 +1,10 @@
+using System.Threading;
 using System;
 using LetsCode.Kanban.Application.Core;
 using LetsCode.Kanban.WebApi;
 using Microsoft.Extensions.DependencyInjection;
+using Xunit.Abstractions;
+using LetsCode.Kanban.Persistence.EntityFrameworkCore.InMemory;
 
 namespace LetsCode.Kanban.IntegrationTests.Common
 {
@@ -20,7 +23,6 @@ namespace LetsCode.Kanban.IntegrationTests.Common
             _services.AddScoped<IActionContext>(serviceProvider => serviceProvider.GetService<TestActionContext>());
 
             _rootServiceProvider = new Lazy<IServiceProvider>(() => _services.BuildServiceProvider());
-
         }
 
         private bool _isConfigured;

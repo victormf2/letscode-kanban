@@ -3,25 +3,26 @@ using LetsCode.Kanban.Application.Exceptions;
 using LetsCode.Kanban.Application.Models;
 using LetsCode.Kanban.Application.UserActions.UpdateCard;
 using LetsCode.Kanban.IntegrationTests.Common;
-using LetsCode.Kanban.Persistence.InMemory;
+using LetsCode.Kanban.Persistence.EntityFrameworkCore;
 using LetsCode.Kanban.TestHelpers.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace LetsCode.Kanban.IntegrationTests.Application.UserActions.UpdateCard
 {
-    public class UpdateCardAction_IntegrationTests : IntegrationTestsBase
+    public class UpdateCardAction_IntegrationTests : IntegrationTestsBase, IClassFixture<IntegrationTestsFixture>
     {
 
         private readonly UpdateCardAction _updateCardAction;
-        private readonly InMemoryDbContext _dbContext;
+        private readonly ApplicationDbContext _dbContext;
 
         public UpdateCardAction_IntegrationTests(IntegrationTestsFixture integrationTestsFixture) : base(integrationTestsFixture)
         {
             _updateCardAction = ServiceProvider.GetService<UpdateCardAction>();
-            _dbContext = ServiceProvider.GetService<InMemoryDbContext>();
+            _dbContext = ServiceProvider.GetService<ApplicationDbContext>();
         }
 
         [Fact]

@@ -6,15 +6,15 @@ using LetsCode.Kanban.Application.Models;
 using LetsCode.Kanban.Application.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-namespace LetsCode.Kanban.Persistence.InMemory.ApplicationImplementations.Persistence
+namespace LetsCode.Kanban.Persistence.EntityFrameworkCore.ApplicationImplementations.Persistence
 {
-    public class InMemoryCardsRepository : ICardsRepository
+    public class CardsRepository : ICardsRepository
     {
-        private readonly InMemoryDbContext _dbContext;
+        private readonly ApplicationDbContext _dbContext;
         private readonly IActionContext _ctx;
 
-        public InMemoryCardsRepository(
-            InMemoryDbContext dbContext,
+        public CardsRepository(
+            ApplicationDbContext dbContext,
             IActionContext ctx)
         {
             _dbContext = dbContext;

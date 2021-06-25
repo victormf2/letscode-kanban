@@ -4,7 +4,7 @@ using LetsCode.Kanban.Application.Exceptions;
 using LetsCode.Kanban.Application.Models;
 using LetsCode.Kanban.Application.UserActions.RemoveCard;
 using LetsCode.Kanban.IntegrationTests.Common;
-using LetsCode.Kanban.Persistence.InMemory;
+using LetsCode.Kanban.Persistence.EntityFrameworkCore;
 using LetsCode.Kanban.TestHelpers.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,17 +12,18 @@ using System;
 using System.Threading.Tasks;
 using Xunit;
 using System.Collections.Generic;
+using Xunit.Abstractions;
 
 namespace LetsCode.Kanban.IntegrationTests.Application.UserActions.RemoveCard
 {
-    public class RemoveCardAction_IntegrationTests : IntegrationTestsBase
+    public class RemoveCardAction_IntegrationTests : IntegrationTestsBase, IClassFixture<IntegrationTestsFixture>
     {
         private readonly RemoveCardAction _removeCardAction;
-        private readonly InMemoryDbContext _dbContext;
+        private readonly ApplicationDbContext _dbContext;
         public RemoveCardAction_IntegrationTests(IntegrationTestsFixture integrationTestsFixture) : base(integrationTestsFixture)
         {
             _removeCardAction = ServiceProvider.GetService<RemoveCardAction>();
-            _dbContext = ServiceProvider.GetService<InMemoryDbContext>();
+            _dbContext = ServiceProvider.GetService<ApplicationDbContext>();
         }
 
         [Fact]
@@ -102,10 +103,10 @@ namespace LetsCode.Kanban.IntegrationTests.Application.UserActions.RemoveCard
 
         private class CardsGenerator
         {
-            private readonly InMemoryDbContext _dbContext;
+            private readonly ApplicationDbContext _dbContext;
             private readonly int _expectedCount;
 
-            public CardsGenerator(InMemoryDbContext dbContext, int expectedCount)
+            public CardsGenerator(ApplicationDbContext dbContext, int expectedCount)
             {
                 _dbContext = dbContext;
                 _expectedCount = expectedCount;

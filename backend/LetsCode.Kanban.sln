@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2772522D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetsCode.Kanban.UnitTests", "tests\LetsCode.Kanban.UnitTests\LetsCode.Kanban.UnitTests.csproj", "{1BFB7318-D7FB-4DD8-8F73-8C7823A75437}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetsCode.Kanban.Persistence.InMemory", "src\LetsCode.Kanban.Persistence.InMemory\LetsCode.Kanban.Persistence.InMemory.csproj", "{7F8B3339-B6F1-4E1C-8C9B-C04CC6B4C223}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetsCode.Kanban.Persistence.EntityFrameworkCore", "src\LetsCode.Kanban.Persistence.EntityFrameworkCore\LetsCode.Kanban.Persistence.EntityFrameworkCore.csproj", "{7F8B3339-B6F1-4E1C-8C9B-C04CC6B4C223}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetsCode.Kanban.IntegrationTests", "tests\LetsCode.Kanban.IntegrationTests\LetsCode.Kanban.IntegrationTests.csproj", "{03C87C36-D26B-4D63-98B3-517D26FCEA65}"
 EndProject
