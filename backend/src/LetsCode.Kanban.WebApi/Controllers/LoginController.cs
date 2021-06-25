@@ -11,7 +11,7 @@ namespace LetsCode.Kanban.WebApi.Controllers
     [Route("login")]
     public class LoginController : ControllerBase
     {
-        [HttpPost("")]
+        [HttpPost]
         public async Task<LoginResult> Login(LoginParameters parameters,
             [FromServices] LoginAction loginAction)
         {
