@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Card } from './card';
 
 @Component({
@@ -9,9 +9,10 @@ import { Card } from './card';
     'class': 'card'
   }
 })
-export class CardComponent implements OnInit {
+export class CardComponent implements OnInit, AfterViewInit {
 
   @Input() card: Card
+  @ViewChild('content') contentEl!: ElementRef<HTMLDivElement>
 
   constructor() { 
     this.card = {
@@ -23,6 +24,19 @@ export class CardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //[class.content-too-big]="contentWrapper.clientHeight < content.clientHeight"
+  }
+  ngAfterViewInit(): void {
+
+    debugger
+    const contentWrapper = this.contentEl.nativeElement;
+    const contentElement = contentWrapper.firstChild as HTMLParagraphElement;
+    const contentIsTooBig = contentWrapper.clientHeight < contentElement.clientHeight
+
+    if (contentIsTooBig) {
+      contentWrapper.parentElement!.classList.add('content-too-big')
+    }
+    //throw new Error('Method not implemented.');
   }
 
 }
