@@ -39,7 +39,7 @@ export class CardsService {
 
   update(card: Card): Observable<Card> {
     return of(card).pipe(
-      delay(200),
+      delay(3000),
     )
   }
 

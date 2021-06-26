@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
 import { Card, CardListResult } from '@/app/card/card';
 import { CardsService } from '@/app/card/cards.service';
-import { ListConfig } from './list/list-config';
 import { groupBy } from '@/helpers/list-helpers';
+import { Component, OnInit } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { finalize, tap } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
+import { CardMoving } from '../card/card-moving';
+import { ListConfig } from './list/list-config';
+import { ListContext } from './list/list-context';
 
 @UntilDestroy()
 @Component({
@@ -14,17 +16,20 @@ import { finalize, tap } from 'rxjs/operators';
 })
 export class BoardComponent implements OnInit {
 
-  lists: ListConfig[]
+  listConfigs: ListConfig[]
+  listContexts: ListContext[]
   isLoading: boolean = true
 
   constructor(
     readonly cardsService: CardsService
   ) { 
-    this.lists = [
+    this.listConfigs = [
       { id: 'ToDo', title: 'To Do', cards: [], },
       { id: 'Doing', title: 'Doing', cards: [], },
       { id: 'Done', title: 'Done', cards: [], },
     ]
+
+    this.listContexts = this.listConfigs.map((_, listIndex) => this.getListContext(listIndex))
 
     this.cardsService.listAll()
       .pipe(
@@ -42,14 +47,49 @@ export class BoardComponent implements OnInit {
 
   orderCards(cardListResult: CardListResult) {
 
-    function cardCompare(c1: Card, c2: Card) {
-      return c1.title.localeCompare(c2.title)
+    const groupedCards = groupBy(cardListResult.cards, c => c.listId)
+    for (let listConfig of this.listConfigs) {
+      listConfig.cards = groupedCards[listConfig.id]
+      this.sortList(listConfig)
+    }
+  }
+
+  moveCard(cardMoving: CardMoving) {
+    const targetListConfig = this.listConfigs.find(
+      listConfig => listConfig.id === cardMoving.targetListId)
+    
+    if (!targetListConfig) {
+      return
     }
 
-    const groupedCards = groupBy(cardListResult.cards, c => c.listId)
-    for (let list of this.lists) {
-      list.cards = groupedCards[list.id].sort(cardCompare)
+    targetListConfig.cards.push(cardMoving.card)
+    this.sortList(targetListConfig)
+  }
+
+  sortList(listConfig: ListConfig) {
+
+    function cardCompare(c1: Card, c2: Card) {
+      return c1.id.localeCompare(c2.id)
     }
+
+    listConfig.cards.sort(cardCompare)
+  }
+
+  getListContext(listIndex: number): ListContext {
+    const lastListIndex = this.listConfigs.length - 1
+    const current = this.listConfigs[listIndex]
+    const first = this.listConfigs[0]
+    const last = this.listConfigs[lastListIndex]
+    const next = listIndex === lastListIndex ? null : this.listConfigs[listIndex + 1]
+    const previous = listIndex === 0 ? null : this.listConfigs[listIndex - 1]
+
+    return new ListContext(
+      current,
+      first,
+      last,
+      next,
+      previous
+    )
   }
 
 }

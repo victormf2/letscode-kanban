@@ -3,5 +3,6 @@
 </div>
 <div class="cards">
     <app-card *ngFor="let card of config.cards"
-        [card]="card"></app-card>
+        [card]="card"
+        (cardMoving)="removeCard($event.card); notifyCardMoving($event)"></app-card>
 </div>

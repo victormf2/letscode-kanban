@@ -1,6 +1,6 @@
 <header class="card-header">
   <p class="card-header-title">
-    {{ card.title }}
+    {{ manager.card.title }}
   </p>
   <button class="card-header-icon" aria-label="edit card" (click)="startEditing()">
     <span class="icon">
@@ -10,6 +10,24 @@
 </header>
 <div class="card-content">
   <div #content class="content">
-    <p>{{ card.content }}</p>
+    <p>{{ manager.card.content }}</p>
   </div>
 </div>
+<i *ngIf="!isUpdating; then showFormButtons else showLoading"></i>
+<ng-template #showFormButtons>
+  <footer class="card-footer">
+    <a class="card-footer-item" 
+      (click)="previousStep()"
+      [class.is-disabled]="listContext.previous == null">
+      <i class="icofont-arrow-left"></i>
+    </a>
+    <a class="card-footer-item" 
+      (click)="nextStep()"
+      [class.is-disabled]="listContext.next == null">
+      <i class="icofont-arrow-right"></i>
+    </a>
+  </footer>
+</ng-template>
+<ng-template #showLoading>
+  <app-loading-footer></app-loading-footer>
+</ng-template>

@@ -1,6 +1,9 @@
-import { Component, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { ListContext } from '@/app/board/list/list-context';
+import { Component, Input, ViewChild, ElementRef, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { Card } from '../card';
 import { CardManager } from '../card-manager';
+import { CardMoving } from '../card-moving';
+import { CardsService } from '../cards.service';
 
 @Component({
   selector: 'app-card-view',
@@ -10,13 +13,15 @@ import { CardManager } from '../card-manager';
 export class CardViewComponent implements AfterViewInit {
 
   @ViewChild('content') contentEl!: ElementRef<HTMLDivElement>
+  @Output() cardMoving = new EventEmitter<CardMoving>()
 
-  card: Card
+  isUpdating: boolean = false
 
   constructor(
-    readonly manager: CardManager
+    readonly manager: CardManager,
+    readonly listContext: ListContext,
+    readonly cardsService: CardsService,
   ) { 
-    this.card = this.manager.card
   }
 
   ngAfterViewInit(): void {
@@ -31,6 +36,43 @@ export class CardViewComponent implements AfterViewInit {
 
   startEditing(): void {
     this.manager.mode = 'edit'
+  }
+
+  previousStep(): void {
+    const previousListId = this.listContext.previous?.id
+    if (!previousListId) {
+      return
+    }
+    this.requestCardMove(previousListId)
+  }
+
+  nextStep(): void {
+    const nextListId = this.listContext.next?.id
+    if (!nextListId) {
+      return
+    }
+    this.requestCardMove(nextListId)
+  }
+
+  private requestCardMove(listId: string) {
+    this.isUpdating = true
+    const cardToMove: Card = {
+      ...this.manager.card,
+      listId
+    }
+    this.cardsService.update(cardToMove).subscribe(
+      result => {
+        this.manager.card = result
+        this.cardMoving.emit({ 
+          card: this.manager.card, 
+          targetListId: this.manager.card.listId 
+        })
+      },
+      error => {
+        /** TODO toast */
+        this.isUpdating = false
+      }
+    )
   }
 
 }

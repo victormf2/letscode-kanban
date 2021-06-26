@@ -1,8 +1,9 @@
 @import "variables";
 
 .card-content {
+  position: relative;
+
   & > .content {
-    position: relative;
     max-height: 12rem;
     min-height: 3rem;
     overflow-y: hidden;
@@ -18,4 +19,9 @@
     bottom: $card-general-padding;
     pointer-events: none;
   }
+}
+
+.card-footer-item.is-disabled {
+  color: $grey-light;
+  pointer-events: none;
 }

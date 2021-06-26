@@ -4,6 +4,7 @@ import { CardComponent } from './card.component';
 import { CardViewComponent } from './card-view/card-view.component';
 import { CardEditorComponent } from './card-editor/card-editor.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoadingFooterComponent } from './loading-footer/loading-footer.component';
 
 
 
@@ -11,7 +12,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [
     CardComponent,
     CardViewComponent,
-    CardEditorComponent
+    CardEditorComponent,
+    LoadingFooterComponent
   ],
   imports: [
     CommonModule,
