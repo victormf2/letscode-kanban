@@ -49,7 +49,7 @@ export class CardsService {
     // )
 
     return of(this.mockCards).pipe(
-      delay(200),
+      delay(0),
     )
   }
 }

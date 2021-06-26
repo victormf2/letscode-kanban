@@ -1,3 +1,9 @@
+@import "variables";
+
 :host {
     min-width: 18rem;
+}
+
+app-card {
+    margin-bottom: $column-gap;
 }

@@ -4,7 +4,10 @@ import { Card } from './card';
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss']
+  styleUrls: ['./card.component.scss'],
+  host: {
+    'class': 'card'
+  }
 })
 export class CardComponent implements OnInit {
 

@@ -1,7 +1,12 @@
+@import "variables";
+
+:host {
+    display: block;
+    padding: $column-gap;
+}
 
 .columns {
     overflow-x: auto;
-    height: 100%;
-    margin-left: 0;
-    margin-top: 0;
+    // margin-left: 0;
+    // margin-top: 0;
 }
