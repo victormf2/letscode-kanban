@@ -1,0 +1,24 @@
+<form [formGroup]="cardForm">
+  <header class="card-header">
+    <p class="card-header-title">
+      <input formControlName="title"
+        type="text" class="input" placeholder="Enter a title">
+    </p>
+  </header>
+  <div class="card-content">
+    <div class="content">
+      <textarea formControlName="content"
+        class="textarea" placeholder="Enter a content"></textarea>
+    </div>
+  </div>
+  <i *ngIf="cardForm.enabled; then showFormButtons else showLoading"></i>
+  <ng-template #showFormButtons>
+    <footer class="card-footer">
+      <a class="card-footer-item has-text-danger" (click)="cancel()">Cancel</a>
+      <a class="card-footer-item" (click)="save()">Save</a>
+    </footer>
+  </ng-template>
+  <ng-template #showLoading>
+    <app-loading-footer></app-loading-footer>
+  </ng-template>
+</form>

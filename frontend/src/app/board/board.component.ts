@@ -24,7 +24,7 @@ export class BoardComponent implements OnInit {
     readonly cardsService: CardsService
   ) { 
     this.listConfigs = [
-      { id: 'ToDo', title: 'To Do', cards: [], },
+      { id: 'ToDo', title: 'To Do', cards: [], allowAdd: true },
       { id: 'Doing', title: 'Doing', cards: [], },
       { id: 'Done', title: 'Done', cards: [], },
     ]

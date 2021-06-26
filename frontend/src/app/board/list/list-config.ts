@@ -4,4 +4,5 @@ export interface ListConfig {
     id: string
     title: string
     cards: Card[]
+    allowAdd?: boolean
 }

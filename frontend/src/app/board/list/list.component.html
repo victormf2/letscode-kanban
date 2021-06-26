@@ -1,8 +1,11 @@
 <div class="header">
-    {{ config.title }}
+  <p>{{ config.title }}</p>
+  <a class="add-button has-text-primary" *ngIf="config.allowAdd">
+    <i class="icon icofont-plus"></i>
+  </a>
 </div>
+<app-new-card *ngIf="config.allowAdd"></app-new-card>
 <div class="cards">
-    <app-card *ngFor="let card of config.cards"
-        [card]="card"
-        (cardMoving)="removeCard($event.card); notifyCardMoving($event)"></app-card>
+  <app-card *ngFor="let card of config.cards" [card]="card"
+    (cardMoving)="removeCard($event.card); notifyCardMoving($event)"></app-card>
 </div>

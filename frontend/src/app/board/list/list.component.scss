@@ -1,9 +1,21 @@
 @import "variables";
 
 :host {
-    min-width: 18rem;
+	min-width: 18rem;
 }
 
-app-card {
-    margin-bottom: $column-gap;
+app-card,
+app-new-card,
+.header {
+	margin-bottom: $column-gap;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	padding: $card-general-padding $card-general-padding 0 $card-general-padding;
+}
+
+.add-button {
+	right: $card-general-padding;
 }

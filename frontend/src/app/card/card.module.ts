@@ -7,6 +7,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoadingFooterComponent } from './loading-footer/loading-footer.component';
 import { CardViewMenuComponent } from './card-view-menu/card-view-menu.component';
 import { HelpersModule } from '@/app/helpers/helpers.module';
+import { NewCardComponent } from './new-card/new-card.component';
+import { CardEditorBaseComponent } from './card-editor-base/card-editor-base.component';
 
 
 
@@ -16,7 +18,9 @@ import { HelpersModule } from '@/app/helpers/helpers.module';
     CardViewComponent,
     CardEditorComponent,
     LoadingFooterComponent,
-    CardViewMenuComponent
+    CardViewMenuComponent,
+    NewCardComponent,
+    CardEditorBaseComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +28,8 @@ import { HelpersModule } from '@/app/helpers/helpers.module';
     HelpersModule,
   ],
   exports: [
-    CardComponent
+    CardComponent,
+    NewCardComponent,
   ]
 })
 export class CardModule { }

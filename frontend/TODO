@@ -1,5 +1,9 @@
-add card
+[doing] add card
+backend exception middleware
 authentication
+replace mock with actual api calls
 remove confirm modal
-error toasts
-style column titles
+error toasts, frontend validation
+style column titles, change card menu gear icon to vertical dots
+docker 
+

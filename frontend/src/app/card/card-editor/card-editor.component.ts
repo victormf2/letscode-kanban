@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Card } from '../card';
+import { CardValue } from '../card-editor-base/card-value';
 import { CardManager } from '../card-manager';
 import { CardsService } from '../cards.service';
 
@@ -11,33 +12,33 @@ import { CardsService } from '../cards.service';
 })
 export class CardEditorComponent implements OnInit {
 
-  cardForm!: FormGroup
-  
+  cardForm: FormControl
+
   constructor(
     readonly manager: CardManager,
     readonly cardsService: CardsService
   ) {
+    const formValue: CardValue = {
+      title: manager.card.title,
+      content: manager.card.content
+    }
+    this.cardForm = new FormControl(formValue)
   }
 
   ngOnInit(): void {
-    this.cardForm = new FormGroup({
-      title: new FormControl(this.manager.card.title),
-      content: new FormControl(this.manager.card.content),
-    })
   }
 
   stopEditing() {
     this.manager.mode = 'view'
   }
 
-  save() {
+  save(cardValue: CardValue) {
     this.cardForm.disable()
 
-    const cardValues = this.cardForm.value
     const cardToSave: Card = { 
       ...this.manager.card,
-      title: cardValues.title,
-      content: cardValues.content
+      title: cardValue.title,
+      content: cardValue.content
     }
     this.cardsService.update(cardToSave).subscribe(
       result => {
