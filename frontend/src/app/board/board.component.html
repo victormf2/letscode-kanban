@@ -1,0 +1,5 @@
+<div class="columns is-mobile" [class.has-background-danger]="isLoading">
+    <app-list *ngFor="let listConfig of lists"
+        [config]="listConfig"
+        class="column"></app-list>
+</div>

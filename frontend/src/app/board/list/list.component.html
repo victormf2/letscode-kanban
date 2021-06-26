@@ -1,0 +1,7 @@
+<div class="header">
+    {{ config.title }}
+</div>
+<div class="cards">
+    <app-card *ngFor="let card of config.cards"
+        [card]="card"></app-card>
+</div>
