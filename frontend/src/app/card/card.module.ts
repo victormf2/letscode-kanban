@@ -5,6 +5,8 @@ import { CardViewComponent } from './card-view/card-view.component';
 import { CardEditorComponent } from './card-editor/card-editor.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoadingFooterComponent } from './loading-footer/loading-footer.component';
+import { CardViewMenuComponent } from './card-view-menu/card-view-menu.component';
+import { HelpersModule } from '@/app/helpers/helpers.module';
 
 
 
@@ -13,11 +15,13 @@ import { LoadingFooterComponent } from './loading-footer/loading-footer.componen
     CardComponent,
     CardViewComponent,
     CardEditorComponent,
-    LoadingFooterComponent
+    LoadingFooterComponent,
+    CardViewMenuComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    HelpersModule,
   ],
   exports: [
     CardComponent

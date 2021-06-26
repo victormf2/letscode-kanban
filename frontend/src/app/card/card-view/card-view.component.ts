@@ -16,6 +16,7 @@ export class CardViewComponent implements AfterViewInit {
   @Output() cardMoving = new EventEmitter<CardMoving>()
 
   isUpdating: boolean = false
+  showContextMenu: boolean = false
 
   constructor(
     readonly manager: CardManager,
@@ -34,8 +35,8 @@ export class CardViewComponent implements AfterViewInit {
     }
   }
 
-  startEditing(): void {
-    this.manager.mode = 'edit'
+  toggleContextMenu() {
+    this.showContextMenu = !this.showContextMenu
   }
 
   previousStep(): void {

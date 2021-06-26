@@ -6,5 +6,15 @@ $card-content-padding: 0 $card-general-padding $card-general-padding $card-gener
 
 $body-overflow-y: auto;
 
-$grey:     hsl(0, 0%, 48%);
-$grey-light: hsl(0, 0%, 71%);
+$grey-darker:  hsl(0, 0%, 21%);
+$grey-dark:    hsl(0, 0%, 29%);
+$grey:         hsl(0, 0%, 48%);
+$grey-light:   hsl(0, 0%, 71%);
+$grey-lighter: hsl(0, 0%, 86%);
+$grey-lightest: hsl(0, 0%, 93%);
+
+
+$border: $grey-lighter;
+$border-hover: $grey-light;
+$border-light: $grey-lightest;
+$border-light-hover: $grey-light;

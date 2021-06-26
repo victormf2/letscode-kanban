@@ -10,7 +10,7 @@ import { CardMoving } from './card-moving';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
   host: {
-    'class': 'card'
+    class: 'card'
   },
   providers: [
     CardManager,
