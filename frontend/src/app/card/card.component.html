@@ -1,15 +1,4 @@
-<header class="card-header">
-  <p class="card-header-title">
-    {{ card.title }}
-  </p>
-  <button class="card-header-icon" aria-label="edit card">
-    <span class="icon">
-      <i class="icofont-edit" aria-hidden="true"></i>
-    </span>
-  </button>
-</header>
-<div class="card-content">
-  <div #content class="content">
-    <p>{{ card.content }}</p>
-  </div>
-</div>
+<ng-container [ngSwitch]="manager.mode">
+  <app-card-view *ngSwitchCase="'view'" [card]="card"></app-card-view>
+  <app-card-editor *ngSwitchCase="'edit'" [card]="card"></app-card-editor>
+</ng-container>

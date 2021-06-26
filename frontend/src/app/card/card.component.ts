@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Card } from './card';
+import { CardManager } from './card-manager';
 
 @Component({
   selector: 'app-card',
@@ -7,36 +8,22 @@ import { Card } from './card';
   styleUrls: ['./card.component.scss'],
   host: {
     'class': 'card'
-  }
+  },
+  providers: [CardManager]
 })
-export class CardComponent implements OnInit, AfterViewInit {
+export class CardComponent {
 
-  @Input() card: Card
-  @ViewChild('content') contentEl!: ElementRef<HTMLDivElement>
+  @Input() card!: Card
 
-  constructor() { 
+  constructor(
+    readonly manager: CardManager
+  ) {
     this.card = {
       id: '',
       title: '',
       content: '',
       listId: ''
     }
-  }
-
-  ngOnInit(): void {
-    //[class.content-too-big]="contentWrapper.clientHeight < content.clientHeight"
-  }
-  ngAfterViewInit(): void {
-
-    debugger
-    const contentWrapper = this.contentEl.nativeElement;
-    const contentElement = contentWrapper.firstChild as HTMLParagraphElement;
-    const contentIsTooBig = contentWrapper.clientHeight < contentElement.clientHeight
-
-    if (contentIsTooBig) {
-      contentWrapper.parentElement!.classList.add('content-too-big')
-    }
-    //throw new Error('Method not implemented.');
   }
 
 }

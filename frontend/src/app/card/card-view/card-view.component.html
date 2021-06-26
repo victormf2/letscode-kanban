@@ -1,0 +1,15 @@
+<header class="card-header">
+  <p class="card-header-title">
+    {{ card.title }}
+  </p>
+  <button class="card-header-icon" aria-label="edit card" (click)="startEditing()">
+    <span class="icon">
+      <i class="icofont-edit" aria-hidden="true"></i>
+    </span>
+  </button>
+</header>
+<div class="card-content">
+  <div #content class="content">
+    <p>{{ card.content }}</p>
+  </div>
+</div>
