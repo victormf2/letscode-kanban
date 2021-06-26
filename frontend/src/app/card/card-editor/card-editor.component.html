@@ -1,1 +1,28 @@
-<p>card-editor works!</p>
+<form [formGroup]="cardForm">
+  <header class="card-header">
+    <p class="card-header-title">
+      <input formControlName="title"
+        type="text" class="input" placeholder="Enter a title">
+    </p>
+  </header>
+  <div class="card-content">
+    <div class="content">
+      <textarea formControlName="content"
+        class="textarea" placeholder="Enter a content"></textarea>
+    </div>
+  </div>
+  <i *ngIf="cardForm.enabled; then showFormButtons else showLoading"></i>
+  <ng-template #showFormButtons>
+    <footer class="card-footer">
+      <a class="card-footer-item has-text-danger" (click)="stopEditing()">Cancel</a>
+      <a class="card-footer-item" (click)="save()">Save</a>
+    </footer>
+  </ng-template>
+  <ng-template #showLoading>
+    <footer class="card-footer saving">
+      <a class="card-footer-item" aria-label="saving">
+        <i class="icofont-spinner-alt-6 icofont-2x is-spinning"></i>
+      </a>
+    </footer>
+  </ng-template>
+</form>

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CardComponent } from './card.component';
 import { CardViewComponent } from './card-view/card-view.component';
 import { CardEditorComponent } from './card-editor/card-editor.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -13,7 +14,8 @@ import { CardEditorComponent } from './card-editor/card-editor.component';
     CardEditorComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule,
   ],
   exports: [
     CardComponent

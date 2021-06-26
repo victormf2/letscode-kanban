@@ -9,12 +9,15 @@ import { CardManager } from '../card-manager';
 })
 export class CardViewComponent implements AfterViewInit {
 
-  @Input() card!: Card
   @ViewChild('content') contentEl!: ElementRef<HTMLDivElement>
+
+  card: Card
 
   constructor(
     readonly manager: CardManager
-  ) { }
+  ) { 
+    this.card = this.manager.card
+  }
 
   ngAfterViewInit(): void {
     const contentWrapper = this.contentEl.nativeElement;

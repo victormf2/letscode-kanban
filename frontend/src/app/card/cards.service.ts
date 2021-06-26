@@ -24,6 +24,12 @@ export class CardsService {
     ]
   }
 
+  private mockError() {
+    return timer(2000).pipe(
+      switchMap(() => throwError(new Error()))
+    )
+  }
+
   add(card: NewCard): Observable<Card> {
     return of(card).pipe(
       delay(200),
@@ -44,10 +50,6 @@ export class CardsService {
   }
 
   listAll(): Observable<CardListResult> {
-    // return timer(2000).pipe(
-    //   switchMap(() => throwError(new Error()))
-    // )
-
     return of(this.mockCards).pipe(
       delay(0),
     )

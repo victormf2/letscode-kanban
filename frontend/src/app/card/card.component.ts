@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Card } from './card';
 import { CardManager } from './card-manager';
 
@@ -13,17 +13,14 @@ import { CardManager } from './card-manager';
 })
 export class CardComponent {
 
-  @Input() card!: Card
+  @Input() 
+  set card(value: Card) {
+    this.manager.card = value
+  }
 
   constructor(
     readonly manager: CardManager
   ) {
-    this.card = {
-      id: '',
-      title: '',
-      content: '',
-      listId: ''
-    }
   }
 
 }
