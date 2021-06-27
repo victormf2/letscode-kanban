@@ -13,11 +13,17 @@ import { CardsService } from '../cards.service';
 })
 export class CardViewMenuComponent implements OnInit {
 
+  isShowingRemoveModal: boolean
+  isRemoving: boolean
+
   constructor(
     readonly manager: CardManager,
     readonly cardsService: CardsService,
     readonly cardEvents: CardEvents
-  ) { }
+  ) { 
+    this.isShowingRemoveModal = false
+    this.isRemoving = false
+  }
 
   ngOnInit(): void {
   }
@@ -26,7 +32,12 @@ export class CardViewMenuComponent implements OnInit {
     this.manager.mode = 'edit'
   }
 
+  toggleRemoveModal() {
+    this.isShowingRemoveModal = !this.isShowingRemoveModal
+  }
+
   removeCard() {
+    this.isRemoving = true
     this.cardsService.remove(this.manager.card).subscribe(
       _ => {
         this.cardEvents.cardRemoving.next({
@@ -34,7 +45,11 @@ export class CardViewMenuComponent implements OnInit {
           card: this.manager.card
         })
       },
-      error => { /** TODO toast */}
+      error => { 
+        /** TODO toast */
+        this.isRemoving = false
+        this.isShowingRemoveModal = false
+      }
     )
   }
 

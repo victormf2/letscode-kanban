@@ -1,2 +1,28 @@
 <a class="menu-item" (click)="startEditing()">Edit</a>
-<a class="menu-item has-text-danger" (click)="removeCard()">Remove</a>
+<a class="menu-item has-text-danger" (click)="toggleRemoveModal()">Remove</a>
+
+<div *ngIf="isShowingRemoveModal" class="modal is-active">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <div class="card">
+      <header class="card-header">
+        <p class="card-header-title">Remove card?</p>
+      </header>
+      <div class="card-content">
+        <div class="content">
+          <p>Do you really want to remove card <span class="has-text-weight-medium">&#8220;{{ manager.card.title }}&#8221;</span>?</p>
+        </div>
+      </div>
+      <i *ngIf="!isRemoving; then showFormButtons else showLoading"></i>
+      <ng-template #showFormButtons>
+        <footer class="card-footer">
+          <a class="card-footer-item has-text-danger" (click)="toggleRemoveModal()">No, keep it</a>
+          <a class="card-footer-item" (click)="removeCard()">Yes, remove it</a>
+        </footer>
+      </ng-template>
+      <ng-template #showLoading>
+        <app-loading-footer></app-loading-footer>
+      </ng-template>
+    </div>
+  </div>
+</div>
