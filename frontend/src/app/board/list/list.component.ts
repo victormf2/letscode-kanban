@@ -15,7 +15,10 @@ export class ListComponent implements OnInit {
   @Input() context!: ListContext
   @Output() cardMoving = new EventEmitter<CardMoving>()
 
+  isShowingNewCard: boolean
+
   constructor() { 
+    this.isShowingNewCard = false
     this.config = {
       id: '',
       title: '',
@@ -25,6 +28,14 @@ export class ListComponent implements OnInit {
 
 
   ngOnInit(): void {
+  }
+
+  showNewCard() {
+    this.isShowingNewCard = true
+  }
+
+  hideNewCard() {
+     this.isShowingNewCard = false
   }
 
   removeCard(card: Card) {

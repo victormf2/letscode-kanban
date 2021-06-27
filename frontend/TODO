@@ -1,4 +1,5 @@
 [doing] add card
+remove card
 backend exception middleware
 authentication
 replace mock with actual api calls

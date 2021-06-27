@@ -1,1 +1,4 @@
-<p>new-card works!</p>
+<app-card-editor-base 
+  [formControl]="cardForm"
+  (save)="save($event)"
+  (cancel)="stopEditing()"></app-card-editor-base>

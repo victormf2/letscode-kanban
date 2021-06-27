@@ -1,10 +1,14 @@
 <div class="header">
   <p>{{ config.title }}</p>
-  <a class="add-button has-text-primary" *ngIf="config.allowAdd">
+  <a *ngIf="config.allowAdd" (click)="showNewCard()"
+    class="add-button has-text-primary" >
     <i class="icon icofont-plus"></i>
   </a>
 </div>
-<app-new-card *ngIf="config.allowAdd"></app-new-card>
+<app-new-card *ngIf="isShowingNewCard" 
+  [listId]="config.id"
+  (cardMoving)="hideNewCard(); notifyCardMoving($event)"
+  (cancel)="hideNewCard()"></app-new-card>
 <div class="cards">
   <app-card *ngFor="let card of config.cards" [card]="card"
     (cardMoving)="removeCard($event.card); notifyCardMoving($event)"></app-card>
