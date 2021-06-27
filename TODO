@@ -1,13 +1,9 @@
-[requirement] parameter a CORS allowed origins and frontend API_BASE_URL
-[requirement] docker
-
-[bug] add missing local icofont font files
+[requirement] parameter frontend API_BASE_URL
+[requirement] MARKDOWN
 
 [ux+] add authorization controls to swagger ui
 [ux+] expand card (for big contents)
 [ux+] style column titles and column borders
-
-[soft requirement] MARKDOWN
 
 
 [ux] fix some usage issues like auto focus or key commands
