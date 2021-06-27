@@ -94,7 +94,9 @@ namespace LetsCode.Kanban.WebApi
             app.UseCors(options => 
             {
                 options
-                    .WithOrigins("http://localhost:4200")
+                    .WithOrigins(
+                        Environment.GetEnvironmentVariable("CLIENT_HOST") ?? 
+                        "http://localhost:4200")
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials();
