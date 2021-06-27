@@ -1,13 +1,18 @@
-[doing] replace mock with actual api calls
 remove confirm modal
 error toasts
 frontend validation
 style column titles
+fix red background loading
 change card menu gear icon to vertical dots
 stopPropagation not closing other context menus
 action filters for add or update loggin: <datetime> - Card <id> - <titulo> - <Remover|Alterar>
+fix some usage issues like auto focus or key commands
 
+create a README
 load variables from .env file
 parameter a CORS allowed origins and frontend API_BASE_URL
 docker
+
+use actual database
+make virtual delete
 

@@ -58,7 +58,7 @@ export class BoardComponent implements OnInit {
 
     const groupedCards = groupBy(cardListResult.cards, c => c.listId)
     for (let listConfig of this.listConfigs) {
-      listConfig.cards = groupedCards[listConfig.id]
+      listConfig.cards = groupedCards[listConfig.id] || []
       this.sortList(listConfig)
     }
   }
