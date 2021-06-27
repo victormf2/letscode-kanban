@@ -1,19 +1,22 @@
-error toasts
-create a README
+[requirement] parameter a CORS allowed origins and frontend API_BASE_URL
+[requirement] docker
 
-style column titles
-show loading cards on page open
-change card menu gear icon to vertical dots
-stopPropagation not closing other context menus
-fix some usage issues like auto focus or key commands
-MARKDOWN
-expand card (for big contents)
+[ux+] add authorization controls to swagger ui
+[ux+] expand card (for big contents)
+[ux+] style column titles and column borders
 
-load variables from .env file
-parameter a CORS allowed origins and frontend API_BASE_URL
-docker
+[soft requirement] use actual database
+[soft requirement] MARKDOWN
 
-use actual database
-make virtual delete
 
-add authorization controls to swagger ui
+[ux] fix some usage issues like auto focus or key commands
+[ux] change card menu gear icon to vertical dots
+[ux] show loading cards on page open
+
+
+[soft bug] stopPropagation not closing other context menus
+
+[nice to have] make virtual delete
+
+
+
