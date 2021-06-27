@@ -5,6 +5,10 @@
   display: block;
 }
 
+.card-header-title {
+  overflow: hidden;
+}
+
 .card-content {
   position: relative;
 
@@ -24,9 +28,4 @@
     bottom: $card-general-padding;
     pointer-events: none;
   }
-}
-
-.card-footer-item.is-disabled {
-  color: $grey-light;
-  pointer-events: none;
 }

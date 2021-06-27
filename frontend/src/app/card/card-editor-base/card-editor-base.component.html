@@ -1,7 +1,7 @@
 <form [formGroup]="cardForm">
   <header class="card-header">
     <p class="card-header-title">
-      <input formControlName="title"
+      <input formControlName="title" maxlength="50"
         type="text" class="input" placeholder="Enter a title">
     </p>
   </header>
@@ -11,11 +11,11 @@
         class="textarea" placeholder="Enter a content"></textarea>
     </div>
   </div>
-  <i *ngIf="cardForm.enabled; then showFormButtons else showLoading"></i>
+  <i *ngIf="!isSaving; then showFormButtons else showLoading"></i>
   <ng-template #showFormButtons>
     <footer class="card-footer">
       <a class="card-footer-item has-text-danger" (click)="cancel()">Cancel</a>
-      <a class="card-footer-item" (click)="save()">Save</a>
+      <a class="card-footer-item" [class.is-disabled]="cardForm.invalid" (click)="save()">Save</a>
     </footer>
   </ng-template>
   <ng-template #showLoading>

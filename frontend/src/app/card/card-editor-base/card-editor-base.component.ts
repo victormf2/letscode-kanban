@@ -1,5 +1,5 @@
 import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormControl, FormGroup, ControlValueAccessor, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { CardValue } from './card-value';
 
 @Component({
@@ -20,8 +20,10 @@ export class CardEditorBaseComponent implements OnInit, ControlValueAccessor {
   cardForm!: FormGroup
   onChange: any
   onTouched: any
+  isSaving: boolean
   
   constructor() {
+    this.isSaving = false
   }
   writeValue(obj: any): void {
     this.cardForm.setValue(obj)
@@ -37,19 +39,24 @@ export class CardEditorBaseComponent implements OnInit, ControlValueAccessor {
       this.cardForm.disable()
     } else {
       this.cardForm.enable()
+      this.isSaving = false
     }
   }
 
   ngOnInit(): void {
     this.cardForm = new FormGroup({
-      title: new FormControl(''),
-      content: new FormControl(''),
+      title: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(50)
+      ]),
+      content: new FormControl('', [
+        Validators.required
+      ]),
     })
   }
 
   save() {
-    // fazer o save dar disable por padrão
-    // e enviar no evento uma função ou observer pra reabilitar
+    this.isSaving = true
     this.onSave.emit(this.cardForm.value)
   }
 

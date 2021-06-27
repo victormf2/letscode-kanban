@@ -16,3 +16,8 @@ body {
     @extend .is-danger;
   }
 }
+
+.card-footer-item.is-disabled {
+  color: $grey-light;
+  pointer-events: none;
+}
