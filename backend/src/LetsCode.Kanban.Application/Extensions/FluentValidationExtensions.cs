@@ -28,7 +28,7 @@ namespace FluentValidation
 
             return ruleBuilder
                 .Must(validOptions.Contains)
-                .WithMessage($"{{PropertyName}} must be one of these values: {formatted}");
+                .WithMessage($"{{PropertyName}} must be one of these values: {formatted}.");
         }
     }
 }

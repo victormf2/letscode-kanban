@@ -1,9 +1,12 @@
-[doing] backend exception middleware
-authentication
+[doing] authentication
 replace mock with actual api calls
 remove confirm modal
-error toasts, frontend validation
-style column titles, change card menu gear icon to vertical dots, stopPropagation not closing other context menus
+error toasts
+frontend validation
+style column titles
+change card menu gear icon to vertical dots
+stopPropagation not closing other context menus
+action filters for add or update loggin: <datetime> - Card <id> - <titulo> - <Remover|Alterar>
 
 carregar variáveis de arquivo .env
 docker 
