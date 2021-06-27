@@ -10,3 +10,9 @@ body {
 .is-spinning {
   animation: spinAround 1s infinite linear;
 }
+
+.ng-submitted {
+  .ng-invalid {
+    @extend .is-danger;
+  }
+}

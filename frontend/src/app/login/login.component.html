@@ -14,5 +14,5 @@
     </div>
   </div>
 
-  <button class="button is-primary" type="submit" [disabled]="loginForm.disabled">Sign in</button>
+  <button class="button is-primary" type="submit" [disabled]="loginForm.invalid || loginForm.disabled">Sign in</button>
 </form>
