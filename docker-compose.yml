@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+  backend:
+    build: ./backend
+    image: lestcode-kanban-backend:latest
+    ports:
+      - "5000:5001"
+    depends_on:
+      - postgres
+    environment:
+      ASPNETCORE_URLS: "http://0.0.0.0:5001"
+      CLIENT_HOST: http://localhost
+      Postgre__ConnectionString: Host=postgres;Database=letscode_kanban;Username=postgres;Password=letscode
+      Jwt__Issuer: letscode
+      Jwt__ExpiresAfter: 05:00:00
+      Jwt__Secret: zEc2bC2Y1cnqkOgXRVw2E9nweF7XIoB5
+      Authentication__Username: letscode
+      Authentication__Password: lets@123
+  frontend:
+    build: ./frontend
+    image: lestcode-kanban-frontend:latest
+    ports:
+      - "80:80"
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: letscode
