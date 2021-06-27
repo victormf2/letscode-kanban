@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { NewCard } from '../card';
 import { CardValue } from '../card-editor-base/card-value';
-import { CardMoving } from '../card-moving';
+import { CardEvents } from '../card-events';
 import { CardsService } from '../cards.service';
 
 @Component({
@@ -16,13 +16,13 @@ import { CardsService } from '../cards.service';
 export class NewCardComponent implements OnInit {
   
   @Input() listId!: string
-  @Output() cardMoving = new EventEmitter<CardMoving>()
-  @Output() cancel = new EventEmitter()
+  @Output() hide = new EventEmitter()
 
   cardForm: FormControl
 
   constructor(
-    readonly cardsService: CardsService
+    readonly cardsService: CardsService,
+    readonly cardEvents: CardEvents
   ) { 
     const formValue: CardValue = {
       title: '',
@@ -44,16 +44,19 @@ export class NewCardComponent implements OnInit {
 
     this.cardsService.add(newCard).subscribe(
       result => {
-        this.cardMoving.emit({
+        this.cardEvents.cardMoving.next({
+          card: result,
           targetListId: this.listId,
-          card: result
+          sourceListId: ''
         })
-      }
+        this.hide.emit()
+      },
+      error => { /** TODO toast */}
     )
   }
 
   stopEditing() {
-    this.cancel.emit()
+    this.hide.emit()
   }
 
 }

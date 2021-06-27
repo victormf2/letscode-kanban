@@ -4,7 +4,7 @@ import { groupBy } from '@/helpers/list-helpers';
 import { Component, OnInit } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { finalize } from 'rxjs/operators';
-import { CardMoving } from '../card/card-moving';
+import { CardEvents, CardMoving, CardRemoving } from '@/app/card/card-events';
 import { ListConfig } from './list/list-config';
 import { ListContext } from './list/list-context';
 
@@ -21,7 +21,8 @@ export class BoardComponent implements OnInit {
   isLoading: boolean = true
 
   constructor(
-    readonly cardsService: CardsService
+    readonly cardsService: CardsService,
+    readonly cardEvents: CardEvents
   ) { 
     this.listConfigs = [
       { id: 'ToDo', title: 'To Do', cards: [], allowAdd: true },
@@ -33,13 +34,21 @@ export class BoardComponent implements OnInit {
 
     this.cardsService.listAll()
       .pipe(
-        untilDestroyed(this),
         finalize(() => this.isLoading = false)
       )
       .subscribe(
         result => this.orderCards(result),
         error => {/** TODO toast */}
       )
+    
+    this.cardEvents.cardMoving.pipe(
+      untilDestroyed(this)
+    ).subscribe(cardMoving => this.moveCard(cardMoving))
+
+    this.cardEvents.cardRemoving.pipe(
+      untilDestroyed(this)
+    ).subscribe(cardRemoving => this.removeCard(cardRemoving))
+    
   }
 
   ngOnInit(): void {
@@ -55,6 +64,7 @@ export class BoardComponent implements OnInit {
   }
 
   moveCard(cardMoving: CardMoving) {
+    this.removeCard(cardMoving)
     const targetListConfig = this.listConfigs.find(
       listConfig => listConfig.id === cardMoving.targetListId)
     
@@ -64,6 +74,24 @@ export class BoardComponent implements OnInit {
 
     targetListConfig.cards.push(cardMoving.card)
     this.sortList(targetListConfig)
+  }
+
+  removeCard(cardRemoving: CardRemoving) {
+    const sourceListConfig = this.listConfigs.find(
+      listConfig => listConfig.id === cardRemoving.sourceListId)
+
+    if (!sourceListConfig) {
+      return
+    }
+
+    const cardIndex = sourceListConfig.cards.findIndex(
+      card => card.id === cardRemoving.card.id)
+
+    if (cardIndex === -1) {
+      return
+    }
+
+    sourceListConfig.cards.splice(cardIndex, 1)
   }
 
   sortList(listConfig: ListConfig) {

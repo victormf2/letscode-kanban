@@ -7,9 +7,7 @@
 </div>
 <app-new-card *ngIf="isShowingNewCard" 
   [listId]="config.id"
-  (cardMoving)="hideNewCard(); notifyCardMoving($event)"
-  (cancel)="hideNewCard()"></app-new-card>
+  (hide)="hideNewCard()"></app-new-card>
 <div class="cards">
-  <app-card *ngFor="let card of config.cards" [card]="card"
-    (cardMoving)="removeCard($event.card); notifyCardMoving($event)"></app-card>
+  <app-card *ngFor="let card of config.cards" [card]="card"></app-card>
 </div>

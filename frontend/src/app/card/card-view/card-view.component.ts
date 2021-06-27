@@ -1,8 +1,8 @@
 import { ListContext } from '@/app/board/list/list-context';
 import { Component, Input, ViewChild, ElementRef, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { Card } from '../card';
+import { CardEvents } from '../card-events';
 import { CardManager } from '../card-manager';
-import { CardMoving } from '../card-moving';
 import { CardsService } from '../cards.service';
 
 @Component({
@@ -13,7 +13,6 @@ import { CardsService } from '../cards.service';
 export class CardViewComponent implements AfterViewInit {
 
   @ViewChild('content') contentEl!: ElementRef<HTMLDivElement>
-  @Output() cardMoving = new EventEmitter<CardMoving>()
 
   isUpdating: boolean = false
   showContextMenu: boolean = false
@@ -22,6 +21,7 @@ export class CardViewComponent implements AfterViewInit {
     readonly manager: CardManager,
     readonly listContext: ListContext,
     readonly cardsService: CardsService,
+    readonly cardEvents: CardEvents
   ) { 
   }
 
@@ -64,8 +64,9 @@ export class CardViewComponent implements AfterViewInit {
     this.cardsService.update(cardToMove).subscribe(
       result => {
         this.manager.card = result
-        this.cardMoving.emit({ 
-          card: this.manager.card, 
+        this.cardEvents.cardMoving.next({ 
+          card: this.manager.card,
+          sourceListId: this.listContext.current.id,
           targetListId: this.manager.card.listId 
         })
       },

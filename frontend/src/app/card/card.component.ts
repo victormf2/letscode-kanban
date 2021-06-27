@@ -3,7 +3,6 @@ import { ListContext } from '@/app/board/list/list-context';
 import { ListComponent } from '@/app/board/list/list.component';
 import { Card } from './card';
 import { CardManager } from './card-manager';
-import { CardMoving } from './card-moving';
 
 @Component({
   selector: 'app-card',
@@ -25,8 +24,6 @@ import { CardMoving } from './card-moving';
 })
 export class CardComponent {
 
-  @Output() cardMoving = new EventEmitter<CardMoving>()
-
   @Input() 
   set card(value: Card) {
     this.manager.card = value
@@ -35,10 +32,6 @@ export class CardComponent {
   constructor(
     readonly manager: CardManager
   ) {
-  }
-
-  notifyCardMoving(cardMoving: CardMoving) {
-    this.cardMoving.emit(cardMoving)
   }
 
 }

@@ -2,6 +2,5 @@
     <app-list *ngFor="let listConfig of listConfigs; let listIndex = index"
         [config]="listConfig"
         [context]="listContexts[listIndex]"
-        (cardMoving)="moveCard($event)"
         class="column"></app-list>
 </div>

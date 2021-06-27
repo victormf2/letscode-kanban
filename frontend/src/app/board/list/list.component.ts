@@ -1,6 +1,4 @@
-import { Card } from '@/app/card/card';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { CardMoving } from '../../card/card-moving';
+import { Component, Input, OnInit } from '@angular/core';
 import { ListConfig } from './list-config';
 import { ListContext } from './list-context';
 
@@ -13,7 +11,6 @@ export class ListComponent implements OnInit {
   
   @Input() config: ListConfig
   @Input() context!: ListContext
-  @Output() cardMoving = new EventEmitter<CardMoving>()
 
   isShowingNewCard: boolean
 
@@ -36,15 +33,6 @@ export class ListComponent implements OnInit {
 
   hideNewCard() {
      this.isShowingNewCard = false
-  }
-
-  removeCard(card: Card) {
-    const cardIndex = this.config.cards.findIndex(c => c.id === card.id)
-    this.config.cards.splice(cardIndex, 1)
-  }
-
-  notifyCardMoving(cardMoving: CardMoving) {
-    this.cardMoving.emit(cardMoving)
   }
 
 }

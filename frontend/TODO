@@ -1,10 +1,8 @@
-[doing] add card
-remove card
 backend exception middleware
 authentication
 replace mock with actual api calls
 remove confirm modal
 error toasts, frontend validation
-style column titles, change card menu gear icon to vertical dots
+style column titles, change card menu gear icon to vertical dots, stopPropagation not closing other context menus
 docker 
 

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CardEvents } from '../card-events';
 import { CardManager } from '../card-manager';
+import { CardsService } from '../cards.service';
 
 @Component({
   selector: 'app-card-view-menu',
@@ -12,7 +14,9 @@ import { CardManager } from '../card-manager';
 export class CardViewMenuComponent implements OnInit {
 
   constructor(
-    readonly manager: CardManager
+    readonly manager: CardManager,
+    readonly cardsService: CardsService,
+    readonly cardEvents: CardEvents
   ) { }
 
   ngOnInit(): void {
@@ -23,7 +27,15 @@ export class CardViewMenuComponent implements OnInit {
   }
 
   removeCard() {
-    
+    this.cardsService.remove(this.manager.card).subscribe(
+      _ => {
+        this.cardEvents.cardRemoving.next({
+          sourceListId: this.manager.card.listId,
+          card: this.manager.card
+        })
+      },
+      error => { /** TODO toast */}
+    )
   }
 
 }
