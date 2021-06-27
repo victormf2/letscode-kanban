@@ -1,7 +1,6 @@
 using System;
-using LetsCode.Kanban.Application.Core;
 
-namespace LetsCode.Kanban.WebApi.ApplicationImplementations.Core
+namespace LetsCode.Kanban.Application.Core.Implementation
 {
     public class UtcDateTime : IDateTime
     {

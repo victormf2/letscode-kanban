@@ -3,12 +3,11 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using LetsCode.Kanban.Application.Authentication;
 using LetsCode.Kanban.Application.Core;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace LetsCode.Kanban.WebApi.ApplicationImplementations.Authentication
+namespace LetsCode.Kanban.Application.Authentication.Implementation
 {
     public class JwtGeneratorOptions
     {

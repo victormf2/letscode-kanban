@@ -1,11 +1,11 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
-using LetsCode.Kanban.WebApi.ApplicationImplementations.Authentication;
 using Microsoft.Extensions.Options;
 using Moq;
 using Xunit;
 using LetsCode.Kanban.Application.Core;
 using System;
+using LetsCode.Kanban.Application.Authentication.Implementation;
 
 namespace LetsCode.Kanban.UnitTests.WebApi.ApplicationImplementations.Authentication
 {

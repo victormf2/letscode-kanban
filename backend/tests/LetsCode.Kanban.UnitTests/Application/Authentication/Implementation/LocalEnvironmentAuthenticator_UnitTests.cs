@@ -1,6 +1,6 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
-using LetsCode.Kanban.WebApi.ApplicationImplementations.Authentication;
+using LetsCode.Kanban.Application.Authentication.Implementation;
 using Microsoft.Extensions.Options;
 using Moq;
 using Xunit;

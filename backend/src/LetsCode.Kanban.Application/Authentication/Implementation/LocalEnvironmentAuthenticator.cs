@@ -1,9 +1,8 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
-using LetsCode.Kanban.Application.Authentication;
 using Microsoft.Extensions.Options;
 
-namespace LetsCode.Kanban.WebApi.ApplicationImplementations.Authentication
+namespace LetsCode.Kanban.Application.Authentication.Implementation
 {
     public class LocalEnvironmentAuthenticatorOptions
     {

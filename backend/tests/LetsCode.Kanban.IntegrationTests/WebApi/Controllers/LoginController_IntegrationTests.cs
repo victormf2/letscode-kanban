@@ -20,11 +20,15 @@ namespace LetsCode.Kanban.IntegrationTests.WebApi.Controllers
         [Fact]
         public async Task Must_authenticate_on_test_route()
         {
+            var unauthorizedResponse = await _httpClient.GetAsync("/login/test");
+
+            Assert.Equal(HttpStatusCode.Unauthorized, unauthorizedResponse.StatusCode);
+
             await Login();
 
-            var response = await _httpClient.GetAsync("/login/test");
+            var authorizedResponse = await _httpClient.GetAsync("/login/test");
 
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal(HttpStatusCode.OK, authorizedResponse.StatusCode);
         }
 
         private async Task<LoginResult> Login()

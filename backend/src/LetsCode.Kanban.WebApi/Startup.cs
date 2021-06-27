@@ -1,6 +1,7 @@
 using LetsCode.Kanban.Application.Authentication;
+using LetsCode.Kanban.Application.Authentication.Implementation;
 using LetsCode.Kanban.Application.Core;
-using LetsCode.Kanban.WebApi.ApplicationImplementations.Authentication;
+using LetsCode.Kanban.Application.Core.Implementation;
 using LetsCode.Kanban.WebApi.ApplicationImplementations.Core;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
