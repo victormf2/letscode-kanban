@@ -1,3 +1,4 @@
+import { NotificationsService } from '@/app/notifications/notifications.service';
 import { Component, OnInit } from '@angular/core';
 import { CardEvents } from '../card-events';
 import { CardManager } from '../card-manager';
@@ -19,7 +20,8 @@ export class CardViewMenuComponent implements OnInit {
   constructor(
     readonly manager: CardManager,
     readonly cardsService: CardsService,
-    readonly cardEvents: CardEvents
+    readonly cardEvents: CardEvents,
+    readonly notifications: NotificationsService,
   ) { 
     this.isShowingRemoveModal = false
     this.isRemoving = false
@@ -46,7 +48,7 @@ export class CardViewMenuComponent implements OnInit {
         })
       },
       error => { 
-        /** TODO toast */
+        this.notifications.show('error', error)
         this.isRemoving = false
         this.isShowingRemoveModal = false
       }

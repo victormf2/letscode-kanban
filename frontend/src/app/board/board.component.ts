@@ -7,6 +7,7 @@ import { finalize } from 'rxjs/operators';
 import { CardEvents, CardMoving, CardRemoving } from '@/app/card/card-events';
 import { ListConfig } from './list/list-config';
 import { ListContext } from './list/list-context';
+import { NotificationsService } from '@/app/notifications/notifications.service';
 
 @UntilDestroy()
 @Component({
@@ -22,7 +23,8 @@ export class BoardComponent implements OnInit {
 
   constructor(
     readonly cardsService: CardsService,
-    readonly cardEvents: CardEvents
+    readonly cardEvents: CardEvents,
+    readonly notifications: NotificationsService,
   ) { 
     this.listConfigs = [
       { id: 'ToDo', title: 'To Do', cards: [], allowAdd: true },
@@ -38,7 +40,9 @@ export class BoardComponent implements OnInit {
       )
       .subscribe(
         result => this.orderCards(result),
-        error => {/** TODO toast */}
+        error => {
+          this.notifications.show('error', error)
+        }
       )
     
     this.cardEvents.cardMoving.pipe(

@@ -1,5 +1,6 @@
 import { ListContext } from '@/app/board/list/list-context';
-import { Component, Input, ViewChild, ElementRef, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { NotificationsService } from '@/app/notifications/notifications.service';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { Card } from '../card';
 import { CardEvents } from '../card-events';
 import { CardManager } from '../card-manager';
@@ -21,7 +22,8 @@ export class CardViewComponent implements AfterViewInit {
     readonly manager: CardManager,
     readonly listContext: ListContext,
     readonly cardsService: CardsService,
-    readonly cardEvents: CardEvents
+    readonly cardEvents: CardEvents,
+    readonly notifications: NotificationsService
   ) { 
   }
 
@@ -71,7 +73,7 @@ export class CardViewComponent implements AfterViewInit {
         })
       },
       error => {
-        /** TODO toast */
+        this.notifications.show('error', error)
         this.isUpdating = false
       }
     )

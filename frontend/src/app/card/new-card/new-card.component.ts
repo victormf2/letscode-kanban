@@ -1,3 +1,4 @@
+import { NotificationsService } from '@/app/notifications/notifications.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { NewCard } from '../card';
@@ -22,7 +23,8 @@ export class NewCardComponent implements OnInit {
 
   constructor(
     readonly cardsService: CardsService,
-    readonly cardEvents: CardEvents
+    readonly cardEvents: CardEvents,
+    readonly notifications: NotificationsService
   ) { 
     const formValue: CardValue = {
       title: '',
@@ -52,7 +54,7 @@ export class NewCardComponent implements OnInit {
         this.hide.emit()
       },
       error => {
-        /** TODO toast */
+        this.notifications.show('error', error)
         this.cardForm.enable()
       }
     )

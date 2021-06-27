@@ -1,3 +1,4 @@
+import { NotificationsService } from '@/app/notifications/notifications.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Card } from '../card';
@@ -16,7 +17,8 @@ export class CardEditorComponent implements OnInit {
 
   constructor(
     readonly manager: CardManager,
-    readonly cardsService: CardsService
+    readonly cardsService: CardsService,
+    readonly notifications: NotificationsService
   ) {
     const formValue: CardValue = {
       title: manager.card.title,
@@ -46,7 +48,7 @@ export class CardEditorComponent implements OnInit {
         this.stopEditing()
       },
       error => {
-        /** TODO toast */
+        this.notifications.show('error', error)
         this.cardForm.enable()
       }
     )

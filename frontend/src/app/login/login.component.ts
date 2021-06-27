@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NotificationsService } from '../notifications/notifications.service';
 import { LoginService } from './login.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
   constructor(
     readonly loginService: LoginService,
     readonly router: Router,
+    readonly notifications: NotificationsService
   ) {
     this.loginForm = new FormGroup({
       username: new FormControl('', [
@@ -37,7 +39,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/'])
       },
       error => {
-        /** TODO toast */
+        this.notifications.show('error', error)
         this.loginForm.enable()
       }
     )
