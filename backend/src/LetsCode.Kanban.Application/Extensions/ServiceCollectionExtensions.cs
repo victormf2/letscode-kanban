@@ -4,12 +4,15 @@ using LetsCode.Kanban.Application.UserActions.UpdateCard;
 using LetsCode.Kanban.Application.UserActions.RemoveCard;
 using LetsCode.Kanban.Application.UserActions.ListAllCards;
 using LetsCode.Kanban.Application.UserActions.Login;
+using Microsoft.Extensions.Configuration;
+using LetsCode.Kanban.Application.Authentication.Implementation;
+using LetsCode.Kanban.Application.Authentication;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {
-        public static void AddApplication(this IServiceCollection services)
+        public static void AddApplication(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddValidatorsFromAssembly(typeof(ServiceCollectionExtensions).Assembly);
 
@@ -18,6 +21,17 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<RemoveCardAction>();
             services.AddScoped<ListAllCardsAction>();
             services.AddScoped<LoginAction>();
+
+            var authenticationConfigurationSection = configuration.GetSection("Authentication");
+            services.Configure<LocalEnvironmentAuthenticatorOptions>(authenticationConfigurationSection);
+            services.AddSingleton<IAuthenticator, LocalEnvironmentAuthenticator>();
+
+            var jwtConfigurationSection = configuration.GetSection("Jwt");
+            services.Configure<JwtGeneratorOptions>(jwtConfigurationSection, options =>
+            {
+                options.BindNonPublicProperties = true;
+            });
+            services.AddSingleton<IJwtGenerator, JwtGenerator>();
         }
     }
 }
