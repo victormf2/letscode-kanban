@@ -1,11 +1,12 @@
 [requirement] parameter a CORS allowed origins and frontend API_BASE_URL
 [requirement] docker
 
+[bug] add missing local icofont font files
+
 [ux+] add authorization controls to swagger ui
 [ux+] expand card (for big contents)
 [ux+] style column titles and column borders
 
-[soft requirement] use actual database
 [soft requirement] MARKDOWN
 
 

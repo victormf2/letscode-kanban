@@ -1,4 +1,5 @@
 using LetsCode.Kanban.Application.Core;
+using LetsCode.Kanban.Persistence.EntityFrameworkCore.PostgreSql;
 using LetsCode.Kanban.WebApi.ApplicationImplementations.Core;
 using LetsCode.Kanban.WebApi.Filters;
 using LetsCode.Kanban.WebApi.Middlewares;
@@ -28,7 +29,17 @@ namespace LetsCode.Kanban.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplication(Configuration);
-            services.AddInMemoryPersistence();
+
+            var postgreConfiguration = Configuration.GetSection("Postgre");
+            if (postgreConfiguration.Exists())
+            {
+                services.Configure<PostgreSqlOptions>(postgreConfiguration);
+                services.AddPostgreSqlPersistence();
+            }
+            else
+            {
+                services.AddInMemoryPersistence();
+            }
 
             services.AddJwtAuthentication(Configuration);
             services.AddAuthorization();
