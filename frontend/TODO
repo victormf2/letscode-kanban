@@ -1,5 +1,4 @@
-[doing] authentication
-replace mock with actual api calls
+[doing] replace mock with actual api calls
 remove confirm modal
 error toasts
 frontend validation
@@ -8,6 +7,7 @@ change card menu gear icon to vertical dots
 stopPropagation not closing other context menus
 action filters for add or update loggin: <datetime> - Card <id> - <titulo> - <Remover|Alterar>
 
-carregar variáveis de arquivo .env
-docker 
+load variables from .env file
+parameter a CORS allowed origins and frontend API_BASE_URL
+docker
 

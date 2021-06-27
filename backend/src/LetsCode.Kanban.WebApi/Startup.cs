@@ -79,6 +79,15 @@ namespace LetsCode.Kanban.WebApi
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 
+            app.UseCors(options => 
+            {
+                options
+                    .WithOrigins("http://localhost:4200")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials();
+            });
+
             app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseRouting();

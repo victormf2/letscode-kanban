@@ -2,13 +2,17 @@ import { Injectable } from '@angular/core';
 import { Observable, of, throwError, timer } from 'rxjs';
 import { Card, CardListResult, NewCard } from './card';
 import { delay, map, switchMap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { api } from '@/helpers/api-helpers';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CardsService {
 
-  constructor() { }
+  constructor(
+    private readonly httpClient: HttpClient
+  ) { }
 
   private mockCards: CardListResult = {
     cards: [
@@ -50,8 +54,6 @@ export class CardsService {
   }
 
   listAll(): Observable<CardListResult> {
-    return of(this.mockCards).pipe(
-      delay(0),
-    )
+    return this.httpClient.get<CardListResult>(api('cards'))
   }
 }

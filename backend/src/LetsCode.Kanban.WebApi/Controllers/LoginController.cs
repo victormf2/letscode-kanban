@@ -17,10 +17,12 @@ namespace LetsCode.Kanban.WebApi.Controllers
         {
             var result = await loginAction.Execute(parameters);
 
-            Response.Cookies.Append("AuthJwt", result.Jwt, new CookieOptions()
-            {
-                HttpOnly = true,
-            });
+            // Response.Cookies.Append("AuthJwt", result.Jwt, new CookieOptions()
+            // {
+            //     HttpOnly = true,
+            //     SameSite = SameSiteMode.None,
+            //     Secure = true
+            // });
 
             return result;
         }
