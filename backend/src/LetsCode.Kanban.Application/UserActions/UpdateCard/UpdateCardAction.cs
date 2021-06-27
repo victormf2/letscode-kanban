@@ -38,6 +38,8 @@ namespace LetsCode.Kanban.Application.UserActions.UpdateCard
 
             await _cards.Update(card);
 
+            _ctx.RegisterUserAction(card, UserAction.Update);
+
             return new UpdateCardResult
             {
                 Id = card.Id,

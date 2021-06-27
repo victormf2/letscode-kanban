@@ -1,5 +1,6 @@
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using LetsCode.Kanban.Application.UserActions.Login;
@@ -24,7 +25,9 @@ namespace LetsCode.Kanban.IntegrationTests.WebApi.Controllers
 
             Assert.Equal(HttpStatusCode.Unauthorized, unauthorizedResponse.StatusCode);
 
-            await Login();
+            var result = await Login();
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", result.Jwt);
 
             var authorizedResponse = await _httpClient.GetAsync("/login/test");
 

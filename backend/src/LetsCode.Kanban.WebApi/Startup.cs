@@ -1,6 +1,6 @@
 using LetsCode.Kanban.Application.Core;
-using LetsCode.Kanban.Application.Core.Implementation;
 using LetsCode.Kanban.WebApi.ApplicationImplementations.Core;
+using LetsCode.Kanban.WebApi.Filters;
 using LetsCode.Kanban.WebApi.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,7 +14,7 @@ using System.Reflection;
 
 namespace LetsCode.Kanban.WebApi
 {
-  public class Startup
+    public class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -36,8 +36,9 @@ namespace LetsCode.Kanban.WebApi
             services.AddHttpContextAccessor();
             services.AddControllers();
 
+            services.AddScoped<LogCardActionAttribute>();
+
             services.AddScoped<IActionContext, WebActionContext>();
-            services.AddSingleton<IDateTime, UtcDateTime>();
 
             services.AddSwaggerGen(c =>
             {

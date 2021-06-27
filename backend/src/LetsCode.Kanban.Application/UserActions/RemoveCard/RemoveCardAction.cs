@@ -35,6 +35,8 @@ namespace LetsCode.Kanban.Application.UserActions.RemoveCard
 
             await _cards.Remove(cardToRemove);
 
+            _ctx.RegisterUserAction(cardToRemove, UserAction.Remove);
+
             var allCards = await _cards.ListAll();
 
             return new RemoveCardResult

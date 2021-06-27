@@ -51,7 +51,10 @@ export class NewCardComponent implements OnInit {
         })
         this.hide.emit()
       },
-      error => { /** TODO toast */}
+      error => {
+        /** TODO toast */
+        this.cardForm.enable()
+      }
     )
   }
 

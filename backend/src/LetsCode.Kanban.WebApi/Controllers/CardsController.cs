@@ -4,12 +4,14 @@ using LetsCode.Kanban.Application.UserActions.AddCard;
 using LetsCode.Kanban.Application.UserActions.ListAllCards;
 using LetsCode.Kanban.Application.UserActions.RemoveCard;
 using LetsCode.Kanban.Application.UserActions.UpdateCard;
+using LetsCode.Kanban.WebApi.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LetsCode.Kanban.WebApi.Controllers
 {
     [ApiController]
+    [ServiceFilter(typeof(LogCardActionAttribute))]
     [Authorize]
     [Route("cards")]
     public class CardsController : ControllerBase

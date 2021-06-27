@@ -7,6 +7,8 @@ using LetsCode.Kanban.Application.UserActions.Login;
 using Microsoft.Extensions.Configuration;
 using LetsCode.Kanban.Application.Authentication.Implementation;
 using LetsCode.Kanban.Application.Authentication;
+using LetsCode.Kanban.Application.Core;
+using LetsCode.Kanban.Application.Core.Implementation;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -14,6 +16,8 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static void AddApplication(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddSingleton<IDateTime, UtcDateTime>();
+            
             services.AddValidatorsFromAssembly(typeof(ServiceCollectionExtensions).Assembly);
 
             services.AddScoped<AddCardAction>();

@@ -1,3 +1,4 @@
+[doing] action filters for add or update loggin: <datetime> - Card <id> - <titulo> - <Remover|Alterar>
 remove confirm modal
 error toasts
 frontend validation
@@ -5,8 +6,8 @@ style column titles
 fix red background loading
 change card menu gear icon to vertical dots
 stopPropagation not closing other context menus
-action filters for add or update loggin: <datetime> - Card <id> - <titulo> - <Remover|Alterar>
 fix some usage issues like auto focus or key commands
+MARKDOWN
 
 create a README
 load variables from .env file
@@ -16,3 +17,4 @@ docker
 use actual database
 make virtual delete
 
+add authorization controls to swagger ui
