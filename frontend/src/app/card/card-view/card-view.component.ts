@@ -15,8 +15,9 @@ export class CardViewComponent implements AfterViewInit {
 
   @ViewChild('content') contentEl!: ElementRef<HTMLDivElement>
 
-  isUpdating: boolean = false
-  showContextMenu: boolean = false
+  isUpdating: boolean
+  isShowingContextMenu: boolean
+  isShowingExpandedContent: boolean
 
   constructor(
     readonly manager: CardManager,
@@ -24,7 +25,10 @@ export class CardViewComponent implements AfterViewInit {
     readonly cardsService: CardsService,
     readonly cardEvents: CardEvents,
     readonly notifications: NotificationsService
-  ) { 
+  ) {
+    this.isUpdating = false
+    this.isShowingContextMenu = false
+    this.isShowingExpandedContent = false
   }
 
   ngAfterViewInit(): void {
@@ -41,8 +45,12 @@ export class CardViewComponent implements AfterViewInit {
     // this is required because of clickOutside behavior
     // angular instantiates context menu during event bubbling and not after
     setTimeout(() => {
-      this.showContextMenu = !this.showContextMenu
+      this.isShowingContextMenu = !this.isShowingContextMenu
     }, 0)
+  }
+
+  toggleExpandedContent() {
+    this.isShowingExpandedContent = !this.isShowingExpandedContent
   }
 
   previousStep(): void {

@@ -1,8 +1,5 @@
 [requirement] parameter frontend API_BASE_URL
 
-[ux+] expand card (for big contents)
-
-
 [ux] fix some usage issues like auto focus or key commands
 [ux] show loading cards on page open
 

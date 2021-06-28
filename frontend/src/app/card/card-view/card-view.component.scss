@@ -9,9 +9,16 @@
   overflow: hidden;
 }
 
-.card-header-icon {
+.context-menu-button {
   font-weight: 900;
   font-size: 1.5rem;
+}
+.card-header-icon {
+  padding-left: 0;
+
+  &:not(:last-child) {
+    padding-right: 0;
+  }
 }
 
 .card-content {

@@ -2,14 +2,17 @@
   <p class="card-header-title">
     {{ manager.card.title }}
   </p>
-  <button class="card-header-icon" aria-label="edit card" (click)="toggleContextMenu()">
+  <app-card-view-menu *ngIf="isShowingContextMenu" (clickOutside)="toggleContextMenu()"></app-card-view-menu>
+  <button class="card-header-icon maximize-button" aria-label="edit card" (click)="toggleExpandedContent()">
+    <span class="icon"><i class="icofont-expand"></i></span>
+  </button>
+  <button class="card-header-icon context-menu-button" aria-label="expand card" (click)="toggleContextMenu()">
     <span class="icon">&#8942;</span>
   </button>
-  <app-card-view-menu *ngIf="showContextMenu" (clickOutside)="toggleContextMenu()"></app-card-view-menu>
 </header>
 <div class="card-content">
   <div #content class="content">
-    <markdown [data]="manager.card.content"></markdown>
+    <ng-containter [ngTemplateOutlet]="cardContentMarkdown"></ng-containter>
   </div>
 </div>
 <i *ngIf="!isUpdating; then showFormButtons else showLoading"></i>
@@ -29,4 +32,19 @@
 </ng-template>
 <ng-template #showLoading>
   <app-loading-footer></app-loading-footer>
+</ng-template>
+
+
+<div class="modal" [class.is-active]="isShowingExpandedContent">
+  <div class="modal-background" (click)="toggleExpandedContent()"></div>
+  <div class="modal-content">
+    <div class="box content">
+      <ng-containter [ngTemplateOutlet]="cardContentMarkdown"></ng-containter>
+    </div>
+  </div>
+  <button class="modal-close is-large" aria-label="close" (click)="toggleExpandedContent()"></button>
+</div>
+
+<ng-template #cardContentMarkdown>
+  <markdown [data]="manager.card.content"></markdown>
 </ng-template>
