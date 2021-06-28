@@ -8,6 +8,7 @@ A simple Kanban web app.
 cd backend
 dotnet run --launch-profile "LetsCode.Kanban.WebApi" --project "./src/LetsCode.Kanban.WebApi"
 ```
+You may visit Swagger API Explorer on http://localhost:5000/swagger
 
 ### 2. Launch frontend:
 ```bash
@@ -21,7 +22,17 @@ npm start
 Username: letscode
 Password: lets@123
 ```
-You may also visit Swagger API Explorer on http://localhost:5000/swagger
+
+
+## Docker-compose
+You may also run the application with docker-compose on repository root folder:
+```bash
+docker-compose up -d
+```
+or with rebuild
+```bash
+docker-compose up -d --build
+```
 
 ## Backend (.NET 5)
 
@@ -84,13 +95,3 @@ dotnet ef database update NewMigrationName -c PostgreSqlApplicationDbContext -s 
 
 ## Frontend (Angular 12)
 There are no specific configurations yet.
-
-## Docker-compose
-You may also run the application with docker-compose on repository root folder:
-```bash
-docker-compose up -d
-```
-or with rebuild
-```bash
-docker-compose up -d --build
-```
