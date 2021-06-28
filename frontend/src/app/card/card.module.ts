@@ -9,6 +9,7 @@ import { CardViewMenuComponent } from './card-view-menu/card-view-menu.component
 import { HelpersModule } from '@/app/helpers/helpers.module';
 import { NewCardComponent } from './new-card/new-card.component';
 import { CardEditorBaseComponent } from './card-editor-base/card-editor-base.component';
+import { MarkdownModule } from 'ngx-markdown';
 
 
 
@@ -26,6 +27,7 @@ import { CardEditorBaseComponent } from './card-editor-base/card-editor-base.com
     CommonModule,
     ReactiveFormsModule,
     HelpersModule,
+    MarkdownModule.forChild()
   ],
   exports: [
     CardComponent,

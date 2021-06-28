@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthenticationInterceptor } from './authentication.interceptor';
 import { NotificationsModule } from './notifications/notifications.module';
+import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { NotificationsModule } from './notifications/notifications.module';
     AppRoutingModule,
     HttpClientModule,
     NotificationsModule,
+    MarkdownModule.forRoot(),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true }

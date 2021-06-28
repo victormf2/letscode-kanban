@@ -11,7 +11,7 @@
 </header>
 <div class="card-content">
   <div #content class="content">
-    <p>{{ manager.card.content }}</p>
+    <markdown [data]="manager.card.content"></markdown>
   </div>
 </div>
 <i *ngIf="!isUpdating; then showFormButtons else showLoading"></i>

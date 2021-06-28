@@ -52,7 +52,6 @@ export class NotificationsService {
   }
 
   private getTextContent(messageObject: any): string {
-    debugger
     if (typeof messageObject === 'string') {
       return messageObject
     }
