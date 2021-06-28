@@ -12,10 +12,16 @@ app-new-card,
 
 .header {
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	padding: $card-general-padding $card-general-padding 0 $card-general-padding;
+	font-size: 1.5rem;
+	text-align: center;
+	font-weight: 700;
+	position: relative;
 }
 
 .add-button {
+	position: absolute;
 	right: $card-general-padding;
+	color: #fff;
 }
