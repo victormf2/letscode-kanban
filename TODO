@@ -1,7 +1,7 @@
+[requirement] update README
 [requirement] parameter frontend API_BASE_URL
 [requirement] MARKDOWN
 
-[ux+] add authorization controls to swagger ui
 [ux+] expand card (for big contents)
 [ux+] style column titles and column borders
 

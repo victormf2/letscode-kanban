@@ -30,6 +30,8 @@ namespace LetsCode.Kanban.WebApi
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddApiDocs();
+
             services.AddApplication(Configuration);
 
             var postgreConfiguration = Configuration.GetSection("Postgre");
@@ -52,29 +54,6 @@ namespace LetsCode.Kanban.WebApi
             services.AddScoped<LogCardActionAttribute>();
 
             services.AddScoped<IActionContext, WebActionContext>();
-
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Version = "v1",
-                    Title = "Let's Code – Kanban",
-                    Description = "A simple example ASP.NET Core Web API",
-                    Contact = new OpenApiContact
-                    {
-                        Name = "Victor Machado de França",
-                        Email = string.Empty,
-                        Url = new Uri("https://github.com/victormf2"),
-                    },
-                });
-
-                c.CustomSchemaIds(type => type.FullName.Replace('+', '.'));
-
-                // Set the comments path for the Swagger JSON and UI.
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath);
-            });
 
             services.AddScoped<ErrorHandlingMiddleware>();
         }
