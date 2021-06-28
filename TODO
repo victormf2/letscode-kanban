@@ -1,15 +1,11 @@
 [requirement] parameter frontend API_BASE_URL
-[requirement] MARKDOWN
 
 [ux+] expand card (for big contents)
 
 
 [ux] fix some usage issues like auto focus or key commands
-[ux] change card menu gear icon to vertical dots
 [ux] show loading cards on page open
 
-
-[soft bug] stopPropagation not closing other context menus
 
 [nice to have] make virtual delete
 

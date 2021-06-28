@@ -38,7 +38,11 @@ export class CardViewComponent implements AfterViewInit {
   }
 
   toggleContextMenu() {
-    this.showContextMenu = !this.showContextMenu
+    // this is required because of clickOutside behavior
+    // angular instantiates context menu during event bubbling and not after
+    setTimeout(() => {
+      this.showContextMenu = !this.showContextMenu
+    }, 0)
   }
 
   previousStep(): void {

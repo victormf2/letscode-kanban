@@ -2,10 +2,8 @@
   <p class="card-header-title">
     {{ manager.card.title }}
   </p>
-  <button class="card-header-icon" aria-label="edit card" (click)="toggleContextMenu(); $event.stopPropagation()">
-    <span class="icon">
-      <i class="icofont-gear" aria-hidden="true"></i>
-    </span>
+  <button class="card-header-icon" aria-label="edit card" (click)="toggleContextMenu()">
+    <span class="icon">&#8942;</span>
   </button>
   <app-card-view-menu *ngIf="showContextMenu" (clickOutside)="toggleContextMenu()"></app-card-view-menu>
 </header>
